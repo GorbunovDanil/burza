@@ -1,0 +1,20 @@
+# Ignore Python virtual environments
+.venv/
+
+# Ignore Django and Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore certs (private keys)
+certs/
+
+# Ignore editor and system files
+.vscode/
+.DS_Store
+
+# Ignore compiled front-end builds (optional)
+frontend/dist/
+
+# Ignore Node dependencies (optional)
+frontend/node_modules/
