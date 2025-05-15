@@ -1,8 +1,8 @@
+// frontend/src/lib/api.ts
+
 import axios from "axios";
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: "https://localhost:8000/api/",
-  withCredentials: false,
+  // mkcert root CA is trusted in your browser, so no httpsAgent needed
 });
-
-export default api;

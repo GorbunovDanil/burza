@@ -88,7 +88,7 @@ INSTALLED_APPS += [
     "api",
     "rest_framework",
     "django_extensions",
-    "api.apps.ApiConfig", 
+    # "api.apps.ApiConfig", 
 ]
 
 # Password validation
