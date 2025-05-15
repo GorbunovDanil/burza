@@ -85,9 +85,10 @@ WSGI_APPLICATION = "burza_project.wsgi.application"
 DATABASES = {"default": {"ENGINE": "django.db.backends.dummy"}}
 
 INSTALLED_APPS += [
-    "rest_framework",
     "api",
+    "rest_framework",
     "django_extensions",
+    "api.apps.ApiConfig", 
 ]
 
 # Password validation
@@ -130,3 +131,27 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": LOG_DIR / "burza.log",
+            "when": "midnight",          # rotate every midnight
+            "backupCount": 7,            # keep 7 log files
+            "formatter": "verbose",
+        },
+    },
+    "formatters": {
+        "verbose": {
+            "format": "[{asctime}] {levelname}: {message}",
+            "style": "{",
+        },
+    },
+    "root": {
+        "handlers": ["file"],
+        "level": "INFO",
+    },
+}
