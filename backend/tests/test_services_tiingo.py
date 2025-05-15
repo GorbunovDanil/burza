@@ -11,7 +11,7 @@ def test_last_n(monkeypatch):
 
     # Monkey-patch Tiingo client so no real HTTP happens
     monkeypatch.setattr(
-        "backend.api.services.tiingo.client.get_dataframe",
+        "api.services.tiingo.client.get_dataframe",
         lambda *a, **k: fake.to_frame("adjClose"),
         raising=False, 
     )
