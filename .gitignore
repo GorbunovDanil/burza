@@ -1,20 +1,66 @@
-# Ignore Python virtual environments
-.venv/
-
-# Ignore Django and Python artifacts
+# =========================
+# Python & Django
+# =========================
+*.py[cod]
 __pycache__/
-*.pyc
 *.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
 
-# Ignore certs (private keys)
-certs/
+# Virtual environments
+.venv/
+env/
+venv/
 
-# Ignore editor and system files
-.vscode/
-.DS_Store
+# Django static/media (if generated)
+staticfiles/
+media/
 
-# Ignore compiled front-end builds (optional)
-frontend/dist/
+# Django secret keys or local config (optional)
+*.env
 
-# Ignore Node dependencies (optional)
+# =========================
+# Node / React (Vite)
+# =========================
 frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# =========================
+# Certificates / Security
+# =========================
+certs/
+*.pem
+*.crt
+*.key
+
+# =========================
+# VS Code / Editor / System
+# =========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# =========================
+# Coverage / Test / CI
+# =========================
+htmlcov/
+coverage.xml
+.pytest_cache/
+.cache/
+*.cover
+
+# =========================
+# Docker / Compose
+# =========================
+**/__docker_cache__/
+docker-compose.override.yml
+
+# =========================
+# Logs & Temp Files
+# =========================
+*.log
+logs/
