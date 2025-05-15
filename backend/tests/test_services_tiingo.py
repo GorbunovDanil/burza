@@ -1,21 +1,24 @@
 import datetime as dt
 import pandas as pd
 import respx
-from backend.api.services.tiingo import last_n_days
+
+from api.services.tiingo import last_n_days, client
 
 @respx.mock
-def test_last_n(monkeypatch):
+def test_last_n_days(monkeypatch):
     today = dt.date.today()
-    fake = pd.Series([1, 2, 3],
-                     index=[today - dt.timedelta(i) for i in range(3)])
+    dates = [today - dt.timedelta(days=i) for i in range(3)]
+    values = [100, 101, 102]
+    fake_df = pd.DataFrame({"adjClose": values}, index=dates)
 
-    # Monkey-patch Tiingo client so no real HTTP happens
+    # Patch client.get_dataframe even if it doesn't exist yet
     monkeypatch.setattr(
-        "api.services.tiingo.client.get_dataframe",
-        lambda *a, **k: fake.to_frame("adjClose"),
-        raising=False, 
+        client, "get_dataframe",
+        lambda *args, **kwargs: fake_df,
+        raising=False
     )
 
-    s = last_n_days("MSFT", 2)
-    assert len(s) == 3
-    assert list(s) == [1, 2, 3]
+    series = last_n_days("MSFT", n=2)
+    # Must return a pd.Series of our values
+    assert isinstance(series, pd.Series)
+    assert list(series) == values
